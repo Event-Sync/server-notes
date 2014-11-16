@@ -6,12 +6,10 @@ var eventSchema = mongoose.Schema({
     time: String,
     location: String,
     invitees: {
-      name: Number,
-      name: Number,
-      name: Number,
+      name: String,
+      phoneNum: String,
+      coming: Boolean,
     },
-    participants: Number
-
   }
 });
 
