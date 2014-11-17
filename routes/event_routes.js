@@ -5,37 +5,37 @@ var User = require('..//models/user');
 
 module.exports = function(app, twil){
   app.post('/api/newEvent', function(req, res){
-  console.log(req.body);
-  var newEvent = new Event(req.body);
-  newEvent.event_name = req.body.events_created.event_name;
-  newEvent.event_location = req.body.events_created.event_location;
-  newEvent.event_time = req.body.events_created.event_time;
-  // newEvent.status_code = req.body.events_created.status_code;
-  newEvent.invitees = req.body.events_created.invitees;
-  newEvent.save(function(err, data) {
+    console.log(req.body);
+    var newEvent = new Event(req.body);
+    newEvent.event_name = req.body.event_name;
+    newEvent.event_location = req.body.event_location;
+    newEvent.event_time = req.body.event_time;
+    // newEvent.status_code = req.body.events_created.status_code;
+    newEvent.invitees = req.body.invitees;
+    newEvent.save(function(err, data) {
 
-  if (err) return res.status(500).send('server error');
+    if (err) return res.status(500).send('server error');
 
-  });
-  console.log(req.body.events_created.invitees);
-  var events = req.body.events_created;
-  var invite = req.body.events_created.invitees;
-  invite.forEach(function(invitee) {
-    var msgObj = invitee.name + ', I am having a ' + events.event_name + '. Would you like to come to the ' + events.event_location + ' on ' + events.event_time + ' ? Please respond with "y" or "n" only.';
-    twil.sendMessage({
-      to: invitee.phone_Num,
-      from: process.env.TWILIONUM,
-      body: msgObj,
-      statusCallback: function(err) {
-        console.log('it worked');
-        }
-    }),
-    function(err, message) {
-      if (err) return res.status(500).send('something went wrong');
-      // console.log(message.sid);
-    };
-  });
-  res.status(200).json(events);
+    });
+    console.log(req.body.invitees);
+    var events = req.body;
+    var invite = req.body.invitees;
+    invite.forEach(function(invitee) {
+      var msgObj = invitee.name + ', I am having a ' + events.event_name + '. Would you like to come to the ' + events.event_location + ' on ' + events.event_time + ' ? Please respond with "y" or "n" only.';
+      twil.sendMessage({
+        to: '+1' + invitee.phone_Num,
+        from: process.env.TWILIONUM,
+        body: msgObj,
+        statusCallback: function(err) {
+          console.log('it worked');
+          }
+      }),
+      function(err, message) {
+        if (err) return res.status(500).send('something went wrong');
+        // console.log(message.sid);
+      };
+    });
+    res.status(200).json(events);
   });
 
   app.get('/api/Event/_id', function(req, res){
