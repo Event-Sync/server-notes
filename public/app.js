@@ -6,7 +6,6 @@ $(document).ready(function() {
   $('#button').click(function() {
     phoneNumber = $('#number').val();
     name = $('#name').val();
-    console.log(phoneNumber, name);
     $.ajax({
       type: 'POST',
       url: '/api/newEvent',
