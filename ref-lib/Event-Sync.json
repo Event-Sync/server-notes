@@ -1,0 +1,77 @@
+
+// signup JSON
+
+{
+	"name": "Matt", // should be dictionary item
+	"phone_number": "2064669834",
+	"password": "password123"
+}
+
+
+// login JSON
+
+{
+	"phone_number": "2064669834",
+	"password": "password123",
+	"status_code": 100
+}
+
+// login confirmation JSON
+{
+	"name": "Matt", // should be dictionary item
+	"phone_number": "2064669834",
+	"response": {
+		"status_code": 400,
+		"description": "login successful!"
+	}
+}
+
+// activity JSON
+
+{
+	"name": "Matt", // should be dictionary item
+	"phone_number": "2064669834",
+	"events_participated": [
+		{ 
+		"event_name": "Interstellar movie meetup",
+		"event_location": "Code Fellows Cinema", 
+		"event_time": "MM/NN/YYYY HH:MMAM",
+		"status_code": 200,
+		"participants": [
+			{"name": "Sam",
+			 "phone_number": "2064669834"},
+			{"name": "Matt",
+			 "phone_number": "2064669834"},				 
+		]},
+	"events_created": [
+		{ 
+		"event_name": "Interstellar movie meetup",
+		"event_location": "Code Fellows Cinema", 
+		"event_time": "MM/NN/YYYY HH:MMAM",
+		"status_code": 200,
+		"participants": [
+			{"name": "Sam",
+			 "phone_number": "2064669834"},
+			{"name": "Matt",
+			 "phone_number": "2064669834"},				 
+		]}
+	]
+
+}
+
+// new activity JSON
+
+{
+	"owner_name":"Sam",
+	"phone_number":"2064669834",
+	"event_name":"Interstellar movie meetup",
+	"event_location": "Code Fellows Cinema", 
+	"event_time": "MM/NN/YYYY HH:MMAM",
+	"status_code": 200,
+	"participants" [
+		{"name": "Sam",
+		 "phone_number": "2064669834"},
+		{"name": "Matt",
+		 "phone_number": "2064669834"},					 
+	]
+}
