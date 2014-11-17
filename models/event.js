@@ -8,7 +8,7 @@ var eventSchema = mongoose.Schema({
     event_name: String,
     event_location: String,
     event_time: Date,
-    status_code: Number,
+    // status_code: Number,
     invitees: [
     {
       name: String,
