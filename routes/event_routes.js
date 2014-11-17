@@ -20,8 +20,8 @@ module.exports = function(app, twil){
   console.log(req.body.events_created.invitees);
   var events = req.body.events_created;
   var invite = req.body.events_created.invitees;
-  var msgObj = invite.name + ', I am having a ' + events.name + '. Would you like to come to the ' + events.event_location + ' on ' + events.event_time + ' ? Please respond with "y" or "n" only.';
   invite.forEach(function(invitee) {
+    var msgObj = invitee.name + ', I am having a ' + events.event_name + '. Would you like to come to the ' + events.event_location + ' on ' + events.event_time + ' ? Please respond with "y" or "n" only.';
     twil.sendMessage({
       to: invitee.phone_Num,
       from: process.env.TWILIONUM,
