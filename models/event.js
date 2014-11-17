@@ -1,5 +1,7 @@
 'use strict';
 
+var mongoose = require('mongoose');
+
 var eventSchema = mongoose.Schema({
     owner_name: String,
     phone_number: String,
