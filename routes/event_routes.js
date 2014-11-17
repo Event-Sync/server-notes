@@ -5,19 +5,16 @@ var User = require('..//models/user');
 
 module.exports = function(app, twil){
   app.post('/api/newEvent', function(req, res){
-    console.log(req.body);
     var newEvent = new Event(req.body);
     newEvent.event_name = req.body.event_name;
     newEvent.event_location = req.body.event_location;
     newEvent.event_time = req.body.event_time;
     // newEvent.status_code = req.body.events_created.status_code;
     newEvent.invitees = req.body.invitees;
-    newEvent.save(function(err, data) {
-
-    if (err) return res.status(500).send('server error');
-
+    newEvent.pre('save', function(next) {
+      next(err);
     });
-    console.log(req.body.invitees);
+
     var events = req.body;
     var invite = req.body.invitees;
     invite.forEach(function(invitee) {
@@ -34,8 +31,10 @@ module.exports = function(app, twil){
         if (err) return res.status(500).send('something went wrong');
         // console.log(message.sid);
       };
+    console.log(newEvent);
+    res.json(newEvent);
     });
-    res.status(200).json(events);
+
   });
 
   app.get('/api/Event/_id', function(req, res){
