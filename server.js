@@ -1,33 +1,39 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var bodyparser = require('body-parser');
+var bodyParser = require('body-parser');
+var twil = require('twilio')(process.env.ACCOUNTSID, process.env.AUTHTOKEN);
+
 var passport = require('passport');
+
 var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(express.static(__dirname + '/public'));
 
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/notes_development');
-app.use(bodyparser.json());
-app.set('jwtSecret', process.env.JWT_secret || 'changethisordie');
+// mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/notes_development');
+// app.set('jwtSecret', process.env.JWT_secret || 'changethisordie');
 
 
 // require('./routes/users_routes')(app, passport);
 // require('./routes/notes_routes')(notesRouter);
 // app.use('/v1', notesRouter);
 
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
-require('./lib/passport')(passport);
-var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
+// require('./lib/passport')(passport);
+// var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 
-var notesRouter = express.Router();
-notesRouter.use(jwtauth);
+// var notesRouter = express.Router();
+// notesRouter.use(jwtauth);
 
 
-require('./routes/event_routes')(app);
-require('./routes/users_routes')(app, passport);
-require('./routes/notes_routes')(notesRouter);
-app.use('/v1', notesRouter);
+require('./routes/event_routes')(app, twil);
+// require('./routes/users_routes')(app, passport);
+// require('./routes/notes_routes')(notesRouter);
+// app.use('/v1', notesRouter);
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
