@@ -9,12 +9,12 @@ $(document).ready(function() {
     console.log(phoneNumber, name);
     $.ajax({
       type: 'POST',
-      url: '/',
+      url: '/api/newEvent',
       data: {
         events_created: {
           event_name: 'Im In Meeting',
           event_location: 'Codefellows, 2nd Floor',
-          event_time: 'Monday at 9am',
+          event_time: Date.now(),
           invitees: [
             {
               name: name,
@@ -22,7 +22,8 @@ $(document).ready(function() {
               coming: false
             }
           ]
-      }},
+        }
+      },
       success: function(parsedJson) {
         console.log(parsedJson);
         console.log('success');
