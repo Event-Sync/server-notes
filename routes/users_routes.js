@@ -26,6 +26,7 @@ app.get('/login', passport.authenticate('basic', {session: false}), function(req
     newUser.save(function(err, data) {
       if (err) return res.status(500).send('server error');
       res.json({'jwt': newUser.generateToken(app.get('jwtSecret'))});
+
     });
   });
 
