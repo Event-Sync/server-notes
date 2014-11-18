@@ -12,7 +12,7 @@ describe('Create new event', function() {
   it('should be able to create a note', function(done) {
     chai.request('http://localhost:3000')
     .post('/api/newEvent')
-    .send({event_name: 'Code Party'})
+    .send({event_name: 'Code Party',})
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(res.body.event_name).to.eql('Code Party');
