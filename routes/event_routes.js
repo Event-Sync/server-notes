@@ -2,11 +2,13 @@
 
 var Event = require('../models/event');
 var randomEventId = require('../lib/randomEventId');
+var twil = require('twilio')(process.env.ACCOUNTSID, process.env.AUTHTOKEN);
+
 // var User = require('..//models/user');
 
-module.exports = function(app, twil){
+module.exports = function(app){
   //request specific event by id
-  app.get('/api/Event/:_id', function(req, res) {
+  app.get('v1/api/Event/:_id', function(req, res) {
     console.log(req.params._id);
     Event.findOne({_id: req.params._id}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
@@ -14,14 +16,14 @@ module.exports = function(app, twil){
     });
   });
   //request all events
-  app.get('/api/Event', function(req, res) {
+  app.get('v1/api/Event', function(req, res) {
     Event.find({}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
     });
   });
   //update event by _id
-  app.put('/api/Event/:_id', function(req, res) {
+  app.put('v1/api/Event/:_id', function(req, res) {
     var _event = req.body;
     delete _event._id;
     Event.findOneAndUpdate({_id: req.params._id}, _event, function(err, data) {
@@ -30,7 +32,7 @@ module.exports = function(app, twil){
     });
   });
   //delete all events
-  app.delete('/api/Event/delete/ALL', function(req, res){
+  app.delete('v1/api/Event/delete/ALL', function(req, res){
     console.log(req.params._id);
     Event.remove({}, function(err) {
       if (err) return res.status(500).send(err);
@@ -46,7 +48,7 @@ module.exports = function(app, twil){
   });
   //create new event and send requests to invitee via text
   app.post('/api/newEvent', function(req, res){
-    console.log(req.body);
+    console.log(req.user);
     var newEvent = new Event(req.body);
     console.log(newEvent);
     newEvent.owner_name = req.body.owner_name;
@@ -81,7 +83,7 @@ module.exports = function(app, twil){
     });
   });
   //update confirmed field for a specific invitee
-  app.post('/api/Event/confirm', function(req, res){
+  app.post('v1/api/Event/confirm', function(req, res){
     var text = req.body;
     var textBody = text.Body.toLowerCase().split(' ');
     var y = false;
