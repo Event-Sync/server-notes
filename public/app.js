@@ -19,7 +19,7 @@ $(document).ready(function() {
         // status_code: 200,
         invitees: [
           {
-            name: name,
+            name: 'Johnny',
             phone_Num: phoneNumber,
             confirmed: false
           }
