@@ -27,13 +27,19 @@ module.exports = function(app) {
     } else if (n) {
       msgObj = 'that is too bad. maybe next time.';
     } else if ((y) && (_idPresent)) {
-      msgObj = 'you are awesome, see you there!';
       var name = {name: 'jacob'};
       console.log(name);
-      Event.findOneAndUpdate({event_id: event_id, invitees: {phone_Num: text.From}}, name, function(err, data) {
+      Event.update({event_id: event_id, invitees: {phone_Num: text.From}}, name, function(err, data) {
         if (err) return res.status(500).send(err);
         console.log(data);
       });
+      Event.save(function(err, data) {
+        if (err) {
+          msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
+          console.log(err);
+        }
+        msgObj = 'you are awesome, see you there!';
+      })
     } else {
     msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
     }
