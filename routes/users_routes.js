@@ -30,7 +30,15 @@ module.exports = function(app) {
     newUser.save(function(err, data) {
       if (err) return res.status(500).send('server error');
       res.json({'jwt': newUser.generateToken(app.get('jwtSecret'))});
+    });
+  });
 
+
+  app.delete('/User/delete/:_id', function(req, res){
+    console.log(req.params._id);
+    User.remove({_id: req.params._id}, function(err) {
+      if (err) return res.status(500).send('there was an error');
+      res.json({msg: 'user deleted'});
     });
   });
 };

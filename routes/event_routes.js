@@ -8,40 +8,39 @@ var twil = require('twilio')(process.env.ACCOUNTSID, process.env.AUTHTOKEN);
 
 module.exports = function(app){
   //request specific event by id
-  app.get('v1/api/Event/:_id', function(req, res) {
-    console.log(req.params._id);
-    Event.findOne({_id: req.params._id}, function(err, data) {
+  app.get('/api/Event/:event_id', function(req, res) {
+    console.log(req.params.event_id);
+    Event.findOne({event_id: req.params.event_id}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
     });
   });
   //request all events
-  app.get('v1/api/Event', function(req, res) {
+  app.get('/api/Event', function(req, res) {
     Event.find({}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
     });
   });
   //update event by _id
-  app.put('v1/api/Event/:_id', function(req, res) {
+  app.put('/api/Event/:event_id', function(req, res) {
     var _event = req.body;
     delete _event._id;
-    Event.findOneAndUpdate({_id: req.params._id}, _event, function(err, data) {
+    Event.findOneAndUpdate({event_id: req.params.event_id}, _event, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
     });
   });
   //delete all events
-  app.delete('v1/api/Event/delete/ALL', function(req, res){
-    console.log(req.params._id);
+  app.delete('/api/Event/delete/ALL', function(req, res){
     Event.remove({}, function(err) {
       if (err) return res.status(500).send(err);
       res.json({msg: 'all events deleted'});
     });
   });//delete event by _id
-  app.delete('/api/Event/delete/:_id', function(req, res){
-    console.log(req.params._id);
-    Event.remove({_id: req.params._id}, function(err) {
+  app.delete('/api/Event/delete/:event_id', function(req, res){
+    console.log(req.params.event_id);
+    Event.remove({event_id: req.params.event_id}, function(err) {
       if (err) return res.status(500).send('there was an error');
       res.json({msg: 'event deleted'});
     });
