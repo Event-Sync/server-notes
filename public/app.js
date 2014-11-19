@@ -10,7 +10,7 @@ $(document).ready(function() {
       type: 'POST',
       url: 'v1/api/newEvent',
       data: {
-        jwt: name,
+        jwt: 'Jacob',
         owner_name: 'IM IN',
         user_phone_number: '5555555555',
         event_name: 'STAND UP',
