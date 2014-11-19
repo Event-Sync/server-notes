@@ -8,8 +8,9 @@ $(document).ready(function() {
     name = $('#name').val();
     $.ajax({
       type: 'POST',
-      url: '/api/newEvent',
+      url: 'v1/api/newEvent',
       data: {
+        jwt: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NDZiYmZjYjYwMDdjMjFhNzZiMWNiNGQifQ.O6yBqTsJUTMs6is-ya1y6fqVLr9SQHdAmFYby1X60DM',
         owner_name: 'IM IN',
         user_phone_number: '5555555555',
         event_name: 'STAND UP',

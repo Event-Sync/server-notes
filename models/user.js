@@ -5,11 +5,9 @@ var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
 
 var userSchema = mongoose.Schema({
-  basic: {
-    name: String,
-    phone_number: String,
-    password: String
-  }
+  name: String,
+  phone_number: String,
+  password: String
 });
 
 userSchema.methods.generateHash = function(password) {
@@ -17,7 +15,7 @@ userSchema.methods.generateHash = function(password) {
 };
 
 userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.basic.password);
+  return bcrypt.compareSync(password, this.password);
 };
 
 userSchema.methods.generateToken = function(secret) {
