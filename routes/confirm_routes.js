@@ -22,7 +22,7 @@ module.exports = function(app) {
         _idPresent = true;
       }
     }
-    if ((y) && (_id) && (n)) {
+    if ((y) && (_idPresent) && (n)) {
       msgObj = 'please only choose "y" OR "n" and your confirmation number';
     } else if (n) {
       msgObj = 'that is too bad. maybe next time.';
