@@ -33,12 +33,12 @@ module.exports = function(app) {
         if (err) return res.status(500).send(err);
         console.log(data);
       });
-      Event.save(function(err, data) {
-        if (err) {
-          msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
-          console.log(err);
-        }
-        msgObj = 'you are awesome, see you there!';
+      // Event.save(function(err, data) {
+      //   if (err) {
+      //     msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
+      //     console.log(err);
+      //   }
+      //   msgObj = 'you are awesome, see you there!';
       })
     } else {
     msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
