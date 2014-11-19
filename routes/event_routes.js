@@ -82,7 +82,7 @@ module.exports = function(app){
     });
   });
   //update confirmed field for a specific invitee
-  app.post('v1/api/Event/confirm', function(req, res){
+  app.post('/api/Event/confirm', function(req, res){
     var text = req.body;
     var textBody = text.Body.toLowerCase().split(' ');
     var y = false;
