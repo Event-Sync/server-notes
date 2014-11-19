@@ -8,7 +8,7 @@ module.exports = function(app) {
   app.post('/api/Event/confirm', function(req, res){
     var text = req.body;
     var textBody = text.Body.toLowerCase().split(' ');
-    console.log(typeof textBody);
+    console.log(req.body);
     var y = false;
     var n = false;
     var _idPresent = false;
