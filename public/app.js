@@ -32,4 +32,20 @@ $(document).ready(function() {
       dataType: 'json'
     });
   });
+  $('#user').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/login/newUser',
+      data: {
+        name: 'Jacob',
+        phone_number: '4444444444',
+        password: 'newtest'
+      },
+      success: function(parsedJson) {
+        console.log(parsedJson);
+        console.log('success');
+      },
+      dataType: 'json'
+    });
+  });
 });
