@@ -31,6 +31,7 @@ module.exports = function(app) {
       var confirm = {confirmed: true};
       Event.findOneAndUpdate({event_id: event_id, invitees: {phone_Num: text.From}}, confirm, function(err, data) {
         if (err) return res.status(500).send(err);
+        console.log(data);
         twil.sms.messages.create({
           to: text.From,
           from: process.env.TWILIONUM,
