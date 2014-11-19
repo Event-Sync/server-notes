@@ -8,7 +8,6 @@ module.exports = function(app) {
   app.post('/api/Event/confirm', function(req, res){
     var text = req.body;
     var textBody = text.Body.toLowerCase().split(' ');
-    console.log('_______----+++++' + textBody);
     var y = false;
     var n = false;
     var _idPresent = false;
@@ -22,6 +21,7 @@ module.exports = function(app) {
         _idPresent = true;
       }
     }
+    console.log(y,n,_idPresent);
     if ((y) && (_id) && (n)) {
       msgObj = 'please only choose "y" OR "n" and your confirmation number';
     } else if (n) {
