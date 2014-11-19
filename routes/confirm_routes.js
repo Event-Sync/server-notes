@@ -31,7 +31,7 @@ module.exports = function(app) {
       console.log(name);
       Event.findOne({event_id: event_id, invitees: {phone_Num: text.From}}, name, function(err, data) {
         if (err) return res.status(500).send(err);
-        console.log(data);
+        console.log('YOLO!----------');
       });
       // Event.save(function(err, data) {
       //   if (err) {
