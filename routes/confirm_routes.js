@@ -12,7 +12,7 @@ module.exports = function(app) {
     var y = false;
     var n = false;
     var _idPresent = false;
-    var _id;
+    var event_id;
     var msgObj = 'please enter "y" or "n"';
     for (var i = 0; i < textBody.length; i++) {
       if (textBody[i] === 'y') y = true;
