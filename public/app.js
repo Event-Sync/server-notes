@@ -8,8 +8,9 @@ $(document).ready(function() {
     name = $('#name').val();
     $.ajax({
       type: 'POST',
-      url: '/api/newEvent',
+      url: 'v1/api/newEvent',
       data: {
+        jwt: name,
         owner_name: 'IM IN',
         user_phone_number: '5555555555',
         event_name: 'STAND UP',
@@ -18,11 +19,27 @@ $(document).ready(function() {
         // status_code: 200,
         invitees: [
           {
-            name: name,
+            name: 'Johnny',
             phone_Num: phoneNumber,
             confirmed: false
           }
         ]
+      },
+      success: function(parsedJson) {
+        console.log(parsedJson);
+        console.log('success');
+      },
+      dataType: 'json'
+    });
+  });
+  $('#user').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/login/newUser',
+      data: {
+        name: 'Jacob',
+        phone_number: '4444444444',
+        password: 'newtest'
       },
       success: function(parsedJson) {
         console.log(parsedJson);
