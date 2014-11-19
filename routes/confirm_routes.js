@@ -8,6 +8,7 @@ module.exports = function(app) {
   app.post('/api/Event/confirm', function(req, res){
     var text = req.body;
     var textBody = text.Body.toLowerCase().split(' ');
+    console.log('_______----+++++' + textBody);
     var y = false;
     var n = false;
     var _idPresent = false;
@@ -42,7 +43,18 @@ module.exports = function(app) {
         res.json(data);
       });
     } else {
-      msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
+    msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
     }
+    twil.sms.messages.create({
+      to: text.From,
+      from: process.env.TWILIONUM,
+      body: msgObj,
+    },
+    function(err, sms) {
+      if (err) return res.status(500).send('something went wrong');
+      console.log(sms);
+    });
+    res.json(data);
+
   });
 };
