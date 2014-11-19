@@ -26,7 +26,7 @@ module.exports = function(app) {
       msgObj = 'please only choose "y" OR "n" and your confirmation number';
     } else if (n) {
       msgObj = 'that is too bad. maybe next time.';
-    } else if ((y) && (_id)) {
+    } else if ((y) && (_idPresent)) {
       msgObj = 'you are awesome, see you there!';
       var confirm = {confirmed: true}
       Event.findOneAndUpdate({event_id: event_id, invitees: {phone_Num: text.From}}, confirm, function(err, data) {
