@@ -14,7 +14,7 @@ module.exports = function(app) {
     var _idPresent = false;
     var _id;
     var msgObj = 'please enter "y" or "n"';
-    for (var i = 0; i < textBody.length(); i++) {
+    for (var i = 0; i < textBody.length; i++) {
       if (textBody[i] === 'y') y = true;
       if (textBody[i] === 'n') n = true;
       if (/^[a-z]{5}[0-9]{2}$/.test(textBody[i])) {
