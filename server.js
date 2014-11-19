@@ -30,6 +30,7 @@ var eventsRouter = express.Router();
 eventsRouter.use(jwtauth);
 
 require('./routes/users_routes')(app);
+require('./routes/confirm_routes')(app);
 require('./routes/event_routes')(eventsRouter);
 app.use('/v1', eventsRouter);
 
