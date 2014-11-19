@@ -18,7 +18,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('connected');
-})
+});
 app.set('jwtSecret', process.env.JWT_secret || 'changethisordie');
 
 app.use(passport.initialize());

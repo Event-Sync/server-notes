@@ -61,7 +61,6 @@ module.exports = function(app){
     newEvent.invitees = req.body.invitees;
     newEvent.save(function(err, newEvent) {
       if (err) console.log(err);
-      var events = req.body;
       var invite = req.body.invitees;
       invite.forEach(function(invitee) {
 

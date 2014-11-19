@@ -27,7 +27,7 @@ module.exports = function(app) {
     console.log(req.body);
     if(req.body.password.length <= 4) return res.status(500).send('Password must be at least 5 charecters long');
     newUser.password = newUser.generateHash(req.body.password);
-    newUser.save(function(err, data) {
+    newUser.save(function(err) {
       if (err) return res.status(500).send('server error');
       res.json({'jwt': newUser.generateToken(app.get('jwtSecret'))});
     });

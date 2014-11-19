@@ -28,7 +28,7 @@ module.exports = function(app) {
       msgObj = 'that is too bad. maybe next time.';
     } else if ((y) && (_idPresent)) {
       msgObj = 'you are awesome, see you there!';
-      var confirm = {confirmed: true}
+      var confirm = {confirmed: true};
       Event.findOneAndUpdate({event_id: event_id, invitees: {phone_Num: text.From}}, confirm, function(err, data) {
         if (err) return res.status(500).send(err);
         twil.sms.messages.create({
@@ -54,7 +54,7 @@ module.exports = function(app) {
       if (err) return res.status(500).send('something went wrong');
       console.log(sms);
     });
-    res.json(data);
+    res.json('');
 
   });
 };
