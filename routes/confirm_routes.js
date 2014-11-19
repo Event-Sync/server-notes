@@ -29,6 +29,7 @@ module.exports = function(app) {
     } else if ((y) && (_idPresent)) {
       msgObj = 'you are awesome, see you there!';
       var confirm = {confirmed: true};
+      console.log(confirm);
       Event.findOneAndUpdate({event_id: event_id, invitees: {phone_Num: text.From}}, confirm, function(err, data) {
         if (err) return res.status(500).send(err);
         console.log(data);
@@ -41,7 +42,6 @@ module.exports = function(app) {
           if (err) return res.status(500).send('something went wrong');
           console.log(sms);
         });
-        res.json(data);
       });
     } else {
     msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
