@@ -39,7 +39,7 @@ module.exports = function(app) {
       //     console.log(err);
       //   }
       //   msgObj = 'you are awesome, see you there!';
-      })
+      // })
     } else {
     msgObj = 'something did not work. please try again. please choose "y" or "n" and copy in your confirmation number above';
     }
