@@ -29,7 +29,7 @@ module.exports = function(app) {
     } else if ((y) && (_idPresent)) {
       var name = {name: 'jacob'};
       console.log(name);
-      Event.update({event_id: event_id, invitees: {phone_Num: text.From}}, name, function(err, data) {
+      Event.findOne({event_id: event_id, invitees: {phone_Num: text.From}}, name, function(err, data) {
         if (err) return res.status(500).send(err);
         console.log(data);
       });
