@@ -10,7 +10,7 @@ $(document).ready(function() {
       type: 'POST',
       url: 'v1/api/newEvent',
       data: {
-        jwt: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NDZiYmZjYjYwMDdjMjFhNzZiMWNiNGQifQ.O6yBqTsJUTMs6is-ya1y6fqVLr9SQHdAmFYby1X60DM',
+        jwt: name,
         owner_name: 'IM IN',
         user_phone_number: '5555555555',
         event_name: 'STAND UP',
