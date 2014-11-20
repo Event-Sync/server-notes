@@ -13,11 +13,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(__dirname + '/public'));
 
-mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/events_development');
+mongoose.connect(process.env.MONGO_URL || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/events_development');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('connected');
+  console.log('connected to db');
 });
 app.set('jwtSecret', process.env.JWT_secret || 'changethisordie');
 
@@ -29,7 +29,7 @@ var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 var eventsRouter = express.Router();
 eventsRouter.use(jwtauth);
 
-require('./routes/users_routes')(app);
+require('./routes/users_routes')(app, jwtauth);
 require('./routes/confirm_routes')(app);
 require('./routes/event_routes')(eventsRouter);
 app.use('/v1', eventsRouter);
