@@ -6,6 +6,7 @@ var eventSchema = mongoose.Schema({
     owner_name: String,
     user_phone_number: String,
     event_name: String,
+    event_description: String,
     event_location: String,
     event_time: Date,
     event_id: String,
