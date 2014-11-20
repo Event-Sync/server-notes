@@ -99,7 +99,7 @@ describe('Crud Events', function() {
 
   it('should be able to get new jwt for user', function(done) {
     chai.request('http://localhost:3000')
-    .get('/login')
+    .post('/login')
     .send({
       phone_number: '9999999999',
       password: 'testpass'
