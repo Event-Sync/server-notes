@@ -2,15 +2,15 @@
 
 $(document).ready(function() {
   var phoneNumber;
-  var name;
+  var jwt;
   $('#button').click(function() {
     phoneNumber = $('#number').val();
-    name = $('#name').val();
+    jwt = $('#name').val();
     $.ajax({
       type: 'POST',
       url: '/v1/api/newEvent',
       data: {
-        jwt: name,
+        jwt: jwt,
         owner_name: 'IM IN',
         user_phone_number: '5555555555',
         event_name: 'STAND UP',
