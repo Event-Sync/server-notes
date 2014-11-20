@@ -63,7 +63,7 @@ module.exports = function(app){
       var invite = req.body.invitees;
       invite.forEach(function(invitee) {
         var msg = invitee.name + ', there is a ' + newEvent.event_name + '. come to the ' + newEvent.event_location + ' on ' + time + ' ? Respond with "y" or "n" only. Secret key: ' + newEvent.event_id;
-        phoneNum = '+1' + invitee.phone_Num;
+        phoneNum = invitee.phone_Num;
         sendMessage(phoneNum, msg);
       });
       res.json(newEvent);

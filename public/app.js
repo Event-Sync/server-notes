@@ -20,7 +20,7 @@ $(document).ready(function() {
         invitees: [
           {
             name: 'Johnny',
-            phone_Num: phoneNumber,
+            phone_Num: '+1' + phoneNumber,
             confirmed: false
           }
         ]
