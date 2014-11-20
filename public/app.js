@@ -8,7 +8,7 @@ $(document).ready(function() {
     name = $('#name').val();
     $.ajax({
       type: 'POST',
-      url: 'v1/api/newEvent',
+      url: '/v1/api/newEvent',
       data: {
         jwt: name,
         owner_name: 'IM IN',

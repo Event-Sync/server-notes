@@ -164,8 +164,7 @@ describe('Crud Events', function() {
 
   it('should be able to view single event', function(done){
     chai.request('http://localhost:3000')
-    .get('/v1/api/event/' + event_id +'?jwt=' + jwt)
-    .end(function(err, res){
+    .get('/v1/api/event/' + event_id +'?jwt=' + jwt)    .end(function(err, res){
       expect(err).to.eql(null);
       expect(res.body.user_phone_number).to.eql('5555555555');
       done();
