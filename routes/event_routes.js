@@ -8,6 +8,7 @@ var sendMessage = require('../lib/sendMessage');
 
 module.exports = function(app){
   app.get('/api/event', function(req, res) {
+    console.log(req.body);
     Event.find({}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
