@@ -8,7 +8,6 @@ var sendMessage = require('../lib/sendMessage');
 
 module.exports = function(app){
   app.get('/api/event/', function(req, res) {
-    console.log(req.params.jwt);
     Event.find({}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
@@ -16,7 +15,7 @@ module.exports = function(app){
   });
   //request specific event by id
 
-  app.get('/api/event/one/:event_id', function(req, res) {
+  app.get('/api/event/:event_id', function(req, res) {
     Event.findOne({event_id: req.params.event_id}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
