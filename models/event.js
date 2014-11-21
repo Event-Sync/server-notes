@@ -14,7 +14,7 @@ var eventSchema = mongoose.Schema({
     invitees: [
     {
       name: String,
-      phone_Num: String,
+      phone_number: String,
       confirmed: Boolean
     }]
 
