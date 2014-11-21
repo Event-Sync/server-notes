@@ -3,7 +3,7 @@
 $(document).ready(function() {
   var phoneNumber;
   var jwt;
-  var week;
+  var week = 604800000;
   $('#button').click(function() {
     phoneNumber = $('#number').val();
     jwt = $('#name').val();
@@ -16,7 +16,6 @@ $(document).ready(function() {
         user_phone_number: '5555555555',
         event_name: 'STAND UP',
         event_location: 'Codefellows, 2nd Floor',
-        week = 604800000;
         event_time: Date.now() - week,
         // status_code: 200,
         invitees: [
