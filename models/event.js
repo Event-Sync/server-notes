@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 
+//to create an event
 var eventSchema = mongoose.Schema({
     owner_name: String,
     user_phone_number: String,
@@ -10,7 +11,6 @@ var eventSchema = mongoose.Schema({
     event_location: String,
     event_time: Date,
     event_id: String,
-    // status_code: Number,
     invitees: [
     {
       name: String,

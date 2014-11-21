@@ -3,9 +3,9 @@
 var Event = require('../models/event');
 var randomEventId = require('../lib/randomEventId');
 var sendMessage = require('../lib/sendMessage');
+var numFormat = require('../lib/numFormat')();
 
 // var User = require('..//models/user');
-
 module.exports = function(app) {
   app.get('/api/event/', function(req, res) {
     Event.find({}, function(err, data) {
@@ -14,14 +14,12 @@ module.exports = function(app) {
     });
   });
   //request specific event by id
-
   app.get('/api/event/:event_id', function(req, res) {
     Event.findOne({event_id: req.params.event_id}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
     });
   });
-
   //update event by _id
   app.put('/api/event/put', function(req, res) {
     var eventId = req.body.event_id;
@@ -45,7 +43,7 @@ module.exports = function(app) {
     });
   });
   //create new event and send requests to invitee via text
-  app.post('/api/newEvent', function(req, res) {
+  app.post('/api/newEvent', numFormat, function(req, res) {
     var phoneNum;
     var newEvent = new Event(req.body);
     newEvent.owner_name = req.body.owner_name;
@@ -55,13 +53,12 @@ module.exports = function(app) {
     newEvent.event_location = req.body.event_location;
     newEvent.event_time = req.body.event_time;
     var time = newEvent.event_time;
-    newEvent.event_id = randomEventId();
-    // newEvent.status_code = req.body.events_created.status_code;
-    newEvent.invitees = req.body.invitees;
+    newEvent.event_id = randomEventId();//creates unique id
+    newEvent.invitees = req.body.invitees;//an array of objects
     newEvent.save(function(err, newEvent) {
       if (err) return console.log(err);
       var invite = req.body.invitees;
-      invite.forEach(function(invitee) {
+      invite.forEach(function(invitee) {//iterates through each invite to send message
         var msg = invitee.name + ', there is a ' + newEvent.event_name + '. come to the ' + newEvent.event_location + ' on ' + time + ' ? Respond with "y" or "n" only. Secret key: ' + newEvent.event_id;
         phoneNum = invitee.phone_number;
         sendMessage(res, phoneNum, msg);

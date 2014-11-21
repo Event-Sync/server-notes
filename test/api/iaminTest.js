@@ -57,17 +57,17 @@ before(function(done) {
     invitees: [
       {
         name: 'atest1',
-        phone_Num: '2111111111',
+        phone_number: '+12111111111',
         confirmed: false
       },
         {
         name: 'atest2',
-        phone_Num: '3222222222',
+        phone_number: '+13222222222',
         confirmed: false
       },
         {
         name: 'atest3',
-        phone_Num: '4333333333',
+        phone_number: '+14333333333',
         confirmed: false
       }
     ]}
@@ -126,17 +126,17 @@ describe('Crud Events', function() {
         invitees: [
           {
             name: 'test1',
-            phone_Num: '1111111111',
+            phone_number: '+11111111111',
             confirmed: false
           },
             {
             name: 'test2',
-            phone_Num: '+12222222222',
+            phone_number: '+12222222222',
             confirmed: false
           },
             {
             name: 'test3',
-            phone_Num: '3333333333',
+            phone_number: '+13333333333',
             confirmed: false
           }
         ]}
