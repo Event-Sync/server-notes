@@ -22,7 +22,7 @@ module.exports = function(app, jwtauth) {
     var newUser = new User(req.body);
     newUser.name = req.body.name;
     newUser.phone_number = req.body.phone_number;
-    if (!/[a-zA-Z0-]{5,}/.test(req.body.password)) return res.status(500).send('Only numbers and letters and underscores');
+    if (!/[a-zA-Z0-9]{5,}/.test(req.body.password)) return res.status(500).send('Only numbers and letters and underscores');
     newUser.password = newUser.generateHash(req.body.password);
     newUser.save(function(err) {
       if (err) return res.status(500).send('server error');
