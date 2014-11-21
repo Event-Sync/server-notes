@@ -64,7 +64,7 @@ module.exports = function(app) {
       invite.forEach(function(invitee) {
         var msg = invitee.name + ', there is a ' + newEvent.event_name + '. come to the ' + newEvent.event_location + ' on ' + time + ' ? Respond with "y" or "n" only. Secret key: ' + newEvent.event_id;
         phoneNum = invitee.phone_Num;
-        sendMessage(phoneNum, msg);
+        sendMessage(res, phoneNum, msg);
       });
       res.json(newEvent);
     });
