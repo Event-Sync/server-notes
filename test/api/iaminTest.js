@@ -152,6 +152,44 @@ describe('Crud Events', function() {
     });
   });
 
+  it('should not allow to create event with num in wrong format', function(done) {
+    chai.request('http://localhost:3000')
+    .post('/v1/api/newEvent')
+    .send(
+      {
+        jwt: jwt,
+        owner_name:'test',
+        user_phone_number: '5555555555',
+        event_name: 'Code Party',
+        event_location: 'TESTLOCATION',
+        event_description: 'example example',
+        event_time: Date.now(),
+        invitees: [
+          {
+            name: 'test1',
+            phone_number: '11111111111',
+            confirmed: false
+          },
+            {
+            name: 'test2',
+            phone_number: '+12222222222',
+            confirmed: false
+          },
+            {
+            name: 'test3',
+            phone_number: '+13333333333',
+            confirmed: false
+          }
+        ]}
+        )
+    .end(function(err, res) {
+      expect(err).to.be.null;
+      expect(res.status).to.eql(400);
+      expect(res.text).to.eql('wrong # format');
+      done();
+    });
+  });
+
   it('should be able to view all events', function(done) {
     chai.request('http://localhost:3000')
     .get('/v1/api/event?jwt=' + jwt)
