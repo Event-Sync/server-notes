@@ -59,7 +59,7 @@ module.exports = function(app) {
       if (err) return console.log(err);
       var invite = req.body.invitees;
       invite.forEach(function(invitee) {//iterates through each invite to send message
-        var msg = invitee.name + ', there is a ' + newEvent.event_name + '. come to the ' + newEvent.event_location + ' on ' + time + ' ? Respond with "y" or "n" and Secret key >>>. Secret key: ' + newEvent.event_id;
+        var msg = invitee.name + ', ' + newEvent.event_name + '. come to the ' + newEvent.event_location + ' on ' + time + ' ? "y" or "n" and Secret key >>>. ' + newEvent.event_id;
         phoneNum = invitee.phone_number;
         sendMessage(res, phoneNum, msg);
       });
