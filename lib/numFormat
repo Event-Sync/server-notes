@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = function(req, res) {
+module.exports = function() {
 
   return function(req, res, next) {
     for (var i = 0; i < req.body.invitees.length; i++) {
-      if (req.body.invitees[i].phone_number[0] !== '+') {
-        return res.status(400).send('please enter number in format "+10987654321"');
+      if (!/^\+1[0-9]{10}/.test(req.body.invitees[i].phone_number)) {
+        return res.status(400).send('wrong # format');
       }
     };
     next();
