@@ -19,9 +19,12 @@ userSchema.methods.validPassword = function(password) {
 };
 
 userSchema.methods.generateToken = function(secret) {
+  var week = 604800000;
+  var expires = Date.now() + week;
   var _this = this;
   var token = jwt.encode({
-    iss: _this._id
+    iss: _this._id,
+    expire: expires
   }, secret);
   return token;
 };

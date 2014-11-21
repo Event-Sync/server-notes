@@ -131,7 +131,7 @@ describe('Crud Events', function() {
           },
             {
             name: 'test2',
-            phone_Num: '2222222222',
+            phone_Num: '+12222222222',
             confirmed: false
           },
             {
@@ -189,7 +189,7 @@ describe('Crud Events', function() {
   it('should update database with info from text', function(done) {
     chai.request('http://localhost:3000')
     .post('/api/event/confirm')
-    .send({Body: event_id + ' Y',From:'2222222222'})
+    .send({Body: event_id + ' Y',From:'+12222222222'})
     .end(function(err, res) {
       expect(err).to.eql.null;
       expect(res.body).to.have.property('msg');
@@ -244,7 +244,7 @@ describe('Crud Events', function() {
     });
   });
 
-  it('should not be able to create an user with a password that is too short', function (done) {
+  it('should not be able to create a user with a password that is too short', function (done) {
     chai.request('http://localhost:3000')
     .post('/login/newUser')
     .send({name: "Test", phone_number: "5553334444", password: "I"})

@@ -20,10 +20,9 @@ module.exports = function(app, jwtauth) {
 
   app.post('/login/newUser', function(req, res) {
     var newUser = new User(req.body);
-    console.log(newUser);
     newUser.name = req.body.name;
     newUser.phone_number = req.body.phone_number;
-    if (req.body.password.length <= 4) return res.status(500).send('Password must be at least 5 charecters long');
+    if (!/[a-zA-Z0-]{5,}/.test(req.body.password)) return res.status(500).send('Only numbers and letters and underscores');
     newUser.password = newUser.generateHash(req.body.password);
     newUser.save(function(err) {
       if (err) return res.status(500).send('server error');
