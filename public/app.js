@@ -38,9 +38,9 @@ $(document).ready(function() {
       type: 'POST',
       url: '/login/newUser',
       data: {
-        name: 'Jacob',
-        phone_number: '4444444444',
-        password: 'newtest'
+        name: 'Evan',
+        phone_number: '2068397850',
+        password: 'winter'
       },
       success: function(parsedJson) {
         console.log(parsedJson);

@@ -183,6 +183,7 @@ describe('Crud Events', function() {
         ]}
         )
     .end(function(err, res) {
+
       expect(err).to.be.null;
       expect(res.status).to.eql(400);
       expect(res.text).to.eql('wrong # format');
