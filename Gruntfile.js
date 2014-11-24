@@ -19,8 +19,7 @@ module.exports = function(grunt) {
     },
 
     simplemocha: {
-      // src: ['test/api/iaminTest.js'],
-      Files: ['test/api/iaminTest.js']
+      src: ['test/api/iaminTest.js']
     }
   });
 
