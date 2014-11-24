@@ -9,7 +9,7 @@ chai.use(chaihttp);
 require('../../server');
 
 var expect = chai.expect;
-
+//cleans out db
 after(function() {
   User.remove({}, function(err) {
     if (err) return res.status(500).send(err);
@@ -25,7 +25,7 @@ after(function() {
 var jwt;
 var event_id;
 var initJwt;
-
+//builds test entries in db
 before(function(done) {
   chai.request('http://localhost:3000')
   .post('/login/newUser')

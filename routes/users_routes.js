@@ -3,6 +3,7 @@
 var User = require('../models/user');
 
 module.exports = function(app, jwtauth) {
+  //verifies user and responds with jwt
   app.post('/login', function(req, res) {
     var phoneNumber = req.body.phone_number;
     var password = req.body.password;
@@ -17,7 +18,7 @@ module.exports = function(app, jwtauth) {
       res.json({jwt: user.generateToken(app.get('jwtSecret'))});
     });
   });
-
+  //crates a new user and responds with jwt
   app.post('/login/newUser', function(req, res) {
     var newUser = new User(req.body);
     newUser.name = req.body.name;
@@ -29,7 +30,7 @@ module.exports = function(app, jwtauth) {
       res.json({jwt: newUser.generateToken(app.get('jwtSecret'))});
     });
   });
-  //delete single user
+  //delete single user by name
   app.delete('/user/delete', jwtauth, function(req, res) {
     User.remove({name: req.body.name}, function(err) {
       if (err) return res.status(500).send('server error');
