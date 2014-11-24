@@ -1,5 +1,5 @@
 'use strict';
-
+// testing app for web (will expand to full usable site)
 $(document).ready(function() {
   var phoneNumber;
   var jwt;

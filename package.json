@@ -1,7 +1,7 @@
 {
-  "name": "sea-b24-notes",
+  "name": "I'm In!",
   "version": "0.1.0",
-  "description": "a note taking web app",
+  "description": "an invite app for everyday events",
   "main": "server.js",
   "scripts": {
     "test": "grunt --verbose"
@@ -10,12 +10,15 @@
     "type": "git",
     "url": "https://github.com/codefellows/sea-b24-notes.git"
   },
-  "author": "tyler@codefellows.com",
+  "authors": {
+  "Node/Backend":["Jacob Shafer", "Brent Parrish"],
+  "IOS/Frontend":["Sam Won", "Matthew Brightbill"]
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codefellows/sea-b24-notes/issues"
+    "url": "https://github.com/Event-Sync/server-notes/issues"
   },
-  "homepage": "https://github.com/codefellows/sea-b24-notes",
+  "homepage": "https://github.com/Event-Sync/server-notes",
   "devDependencies": {
     "chai": "^1.9.2",
     "chai-http": "^1.0.0",
