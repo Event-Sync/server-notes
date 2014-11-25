@@ -1,3 +1,4 @@
+'use strict';
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-simple-mocha');
@@ -19,8 +20,7 @@ module.exports = function(grunt) {
     },
 
     simplemocha: {
-      // src: ['test/api/iaminTest.js'],
-      Files: ['test/api/iaminTest.js']
+      src: ['test/api/iaminTest.js']
     }
   });
 
