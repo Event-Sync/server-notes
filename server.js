@@ -17,7 +17,6 @@ mongoose.connect(process.env.MONGO_URL || process.env.MONGOLAB_URI || process.en
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {//verifies db is connected
-  console.log('connected to db');
 });
 app.set('jwtSecret', process.env.JWT_secret);
 
@@ -36,5 +35,4 @@ app.use('/v1', eventsRouter);
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
-  console.log('server running on port: %d', app.get('port'));
 });
