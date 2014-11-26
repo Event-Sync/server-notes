@@ -26,7 +26,6 @@ before(function(done) {
     });
   newUser.save(function(err) {
     if (err) return console.log(err + 'newUser');
-    console.log('new user added');
   })
   var newEvent = createEvent(
     {
@@ -57,7 +56,6 @@ before(function(done) {
     });
   newEvent.save(function(err, data){
     if (err) return console.log(err + 'newEvent');
-    console.log('new event added');
   });
   done();
 });
@@ -66,12 +64,10 @@ before(function(done) {
 after(function(done) {
   User.remove({}, function(err) {
     if (err) return console.log(err + 'user dusting');
-    console.log('users dusted')
   });
 
   Event.remove({}, function(err) {
     if (err) return console.log(err + 'event dusting');
-    console.log('events dusted');
   });
   done();
 });
