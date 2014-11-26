@@ -3,79 +3,77 @@ var chai = require('chai');
 var chaihttp = require('chai-http');
 var Event = require('../../models/event');
 var User = require('../../models/user');
+var createUser = require('../../lib/newUser');
+var createEvent = require('../../lib/createEvent');
 
 chai.use(chaihttp);
 
 require('../../server');
 
 var expect = chai.expect;
-//cleans out db
-after(function() {
-  User.remove({}, function(err) {
-    if (err) return res.status(500).send(err);
-    console.log('users dusted')
-  });
-
-  Event.remove({}, function(err) {
-    if (err) return res.status(500).send(err);
-    console.log('events dusted');
-  });
-});
 
 var jwt;
 var event_id;
 var initJwt;
 //builds test entries in db
+
 before(function(done) {
-  chai.request('http://localhost:3000')
-  .post('/login/newUser')
-  .send(
+  var newUser = createUser(
     {
       name: 'testtest',
       phone_number: '8888888888',
       password: 'testmanpass'
+    });
+  newUser.save(function(err) {
+    if (err) return console.log(err + 'newUser');
+    console.log('new user added');
   })
-  .end(function(err, res) {
-    console.log('add start user')
-    initJwt = res.body.jwt;
-    done();
-  })
+  var newEvent = createEvent(
+    {
+      jwt: initJwt,
+      owner_name:'inittest',
+      user_phone_number: '6666666666',
+      event_name: 'StandUp',
+      event_location: 'Codefellows',
+      event_description: 'test test test',
+      event_time: Date.now(),
+      invitees: [
+        {
+          name: 'atest1',
+          phone_number: '+12111111111',
+          confirmed: false
+        },
+          {
+          name: 'atest2',
+          phone_number: '+13222222222',
+          confirmed: false
+        },
+          {
+          name: 'atest3',
+          phone_number: '+14333333333',
+          confirmed: false
+        }
+      ]
+    });
+  newEvent.save(function(err, data){
+    if (err) return console.log(err + 'newEvent');
+    console.log('new event added');
+  });
+  done();
 });
 
-before(function(done) {
-  chai.request('http://localhost:3000')
-  .post('/v1/api/newEvent')
-  .send(
-  {
-    jwt: initJwt,
-    owner_name:'inittest',
-    user_phone_number: '6666666666',
-    event_name: 'StandUp',
-    event_location: 'Codefellows',
-    event_description: 'test test test',
-    event_time: Date.now(),
-    invitees: [
-      {
-        name: 'atest1',
-        phone_number: '+12111111111',
-        confirmed: false
-      },
-        {
-        name: 'atest2',
-        phone_number: '+13222222222',
-        confirmed: false
-      },
-        {
-        name: 'atest3',
-        phone_number: '+14333333333',
-        confirmed: false
-      }
-    ]}
-    )
-  .end(function() {
-    console.log('add start event')
-    done();
-  })
+//cleans out db
+after(function(done) {
+  User.remove({}, function(err) {
+    if (err) return console.log(err + 'user dusting');
+    console.log('users dusted')
+  });
+
+  Event.remove({}, function(err) {
+    if (err) return console.log(err + 'event dusting');
+    console.log('events dusted');
+  });
+  done();
 });
 
 describe('Crud Events', function() {
@@ -112,42 +110,39 @@ describe('Crud Events', function() {
   });
 
   it('should be able to create an event', function(done) {
-    chai.request('http://localhost:3000')
-    .post('/v1/api/newEvent')
-    .send(
-      {
-        jwt: jwt,
-        owner_name:'test',
-        user_phone_number: '5555555555',
-        event_name: 'Code Party',
-        event_location: 'TESTLOCATION',
-        event_description: 'example example',
-        event_time: Date.now(),
-        invitees: [
+    var eventInfo = {
+      jwt: jwt,
+      owner_name:'test',
+      user_phone_number: '5555555555',
+      event_name: 'Code Party',
+      event_location: 'TESTLOCATION',
+      event_description: 'example example',
+      event_time: Date.now(),
+      invitees: [
+        {
+          name: 'test1',
+          phone_number: '+11111111111',
+          confirmed: false
+        },
           {
-            name: 'test1',
-            phone_number: '+11111111111',
-            confirmed: false
-          },
-            {
-            name: 'test2',
-            phone_number: '+12222222222',
-            confirmed: false
-          },
-            {
-            name: 'test3',
-            phone_number: '+13333333333',
-            confirmed: false
-          }
-        ]}
-        )
-    .end(function(err, res) {
+          name: 'test2',
+          phone_number: '+12222222222',
+          confirmed: false
+        },
+          {
+          name: 'test3',
+          phone_number: '+13333333333',
+          confirmed: false
+        }
+      ]
+    };
+    newEvent = createEvent(eventInfo);
+    newEvent.save(function(err, data) {
       expect(err).to.eql(null);
-      expect(res.body.event_name).to.eql('Code Party');
-      expect(res.body).to.have.property('_id');
-      expect(res.body).to.have.property('event_id');
-      expect(/^[a-z]{5}[0-9]{2}$/.test(res.body.event_id)).to.be.true;
-      event_id = res.body.event_id;
+      Event.findOne({event_name: 'Code Party'}, function(err, data) {
+        expect(data).to.have.property('event_id');
+        event_id = data.event_id;
+      });
       done();
     });
   });
@@ -196,7 +191,7 @@ describe('Crud Events', function() {
     .get('/v1/api/event?jwt=' + jwt)
     .end(function(err, res) {
       expect(err).to.eql(null);
-      // expect(res.body.length).to.eql(2);
+      expect(res.body.length).to.eql(2);
       done();
     });
   });

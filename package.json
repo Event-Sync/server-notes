@@ -11,8 +11,14 @@
     "url": "https://github.com/codefellows/sea-b24-notes.git"
   },
   "authors": {
-  "Node/Backend":["Jacob Shafer", "Brent Parrish"],
-  "IOS/Frontend":["Sam Won", "Matthew Brightbill"]
+    "Node/Backend": [
+      "Jacob Shafer",
+      "Brent Parrish"
+    ],
+    "IOS/Frontend": [
+      "Sam Won",
+      "Matthew Brightbill"
+    ]
   },
   "license": "MIT",
   "bugs": {
@@ -26,7 +32,7 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-jscs": "^0.8.1",
-    "grunt-simple-mocha": "^0.4.0"
+    "grunt-simple-mocha": "^0.4.0",
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
