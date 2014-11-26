@@ -1,9 +1,9 @@
 'use strict';
 
 var Event = require('../models/event');
-var randomEventId = require('../lib/randomEventId');
 var sendMessage = require('../lib/sendMessage');
 var numFormat = require('../lib/numFormat')();
+var createEvent = require('../lib/createEvent');
 
 // var User = require('..//models/user');
 module.exports = function(app) {
@@ -45,16 +45,8 @@ module.exports = function(app) {
   //create new event and send requests to invitee via text
   app.post('/api/newEvent', numFormat, function(req, res) {
     var phoneNum;
-    var newEvent = new Event(req.body);
-    newEvent.owner_name = req.body.owner_name;
-    newEvent.user_phone_number = req.body.user_phone_number;
-    newEvent.event_name = req.body.event_name;
-    newEvent.description = req.body.event_description;
-    newEvent.event_location = req.body.event_location;
-    newEvent.event_time = req.body.event_time;
+    var newEvent = createEvent(req.body);
     var time = newEvent.event_time;
-    newEvent.event_id = randomEventId();//creates unique id
-    newEvent.invitees = req.body.invitees;//an array of objects
     newEvent.save(function(err, newEvent) {
       if (err) return console.log(err);
       var invite = req.body.invitees;

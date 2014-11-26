@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('../models/user');
+var createUser = require('../lib/newUser');
 
 module.exports = function(app, jwtauth) {
   //verifies user and responds with jwt
@@ -20,11 +21,9 @@ module.exports = function(app, jwtauth) {
   });
   //crates a new user and responds with jwt
   app.post('/login/newUser', function(req, res) {
-    var newUser = new User(req.body);
-    newUser.name = req.body.name;
-    newUser.phone_number = req.body.phone_number;
-    if (!/[a-zA-Z0-9_]{5,}/.test(req.body.password)) return res.status(500).send('Only numbers and letters and underscores');
-    newUser.password = newUser.generateHash(req.body.password);
+    var regex = /[a-zA-Z0-9_]{5,}/;
+    if (!regex.test(req.body.password)) return res.status(500).send('Only numbers and letters and underscores');
+    var newUser = createUser(req.body);
     newUser.save(function(err) {
       if (err) return res.status(500).send('server error');
       res.json({jwt: newUser.generateToken(app.get('jwtSecret'))});

@@ -11,8 +11,14 @@
     "url": "https://github.com/codefellows/sea-b24-notes.git"
   },
   "authors": {
-  "Node/Backend":["Jacob Shafer", "Brent Parrish"],
-  "IOS/Frontend":["Sam Won", "Matthew Brightbill"]
+    "Node/Backend": [
+      "Jacob Shafer",
+      "Brent Parrish"
+    ],
+    "IOS/Frontend": [
+      "Sam Won",
+      "Matthew Brightbill"
+    ]
   },
   "license": "MIT",
   "bugs": {
