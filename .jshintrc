@@ -10,7 +10,6 @@
     "after"      : false,
     "afterEach"  : false,
     "equal"      : false,
-    "$"          : false,
     "document"   : false
   },
   "globalstrict": true,
@@ -21,4 +20,5 @@
   "unused": true,
   "indent": 2,
   "node": true
+
 }

@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/build'));
 
 mongoose.connect(process.env.MONGO_URL || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/events_development');
 var db = mongoose.connection;
