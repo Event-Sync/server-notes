@@ -27,7 +27,7 @@
   "homepage": "https://github.com/Event-Sync/server-notes",
   "devDependencies": {
     "chai": "^1.9.2",
-    "chai-http": "^1.0.0",
+    "chai-http": "^5.1.2",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.10.0",
@@ -42,6 +42,6 @@
     "mongoose": "^3.8.18",
     "passport": "^0.2.1",
     "passport-http": "^0.2.2",
-    "twilio": "^1.8.0"
+    "twilio": "^3.41.0"
   }
 }
